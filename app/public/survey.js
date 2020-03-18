@@ -1,4 +1,4 @@
-var qs = ['You enioy outside activities (ie. day at the beach, hiking, sand volleyball, taking a walk)',
+var questions = ['You enioy outside activities (ie. day at the beach, hiking, sand volleyball, taking a walk)',
     'You enioy inside activities (ie. board/card/video games, TV show/movie binging, Shopping at the Mall, galleries/museums',
     'You enioy alcoholic beverages',
     'You enioy going out for the night',
@@ -12,20 +12,20 @@ var qs = ['You enioy outside activities (ie. day at the beach, hiking, sand voll
 
 
 // Use for loop to traverse the qs array
-for (let i = 0; i < qs.length; i++) {
+for (let i = 0; i < questions.length; i++) {
 
-    qHead = $(`<h3><strong>q ${(i + 1)}<strong></h3>`)
-    q = $(`<h4 class='q' id="q${(i + 1)}"></h4>`).append(qs[i]);
-    select = $(`<select id='q${(i + 1)}'>
-                <option>Select an Option</option>
-                <option value='1'>1</option>
+    questionHead = $(`<h3><strong>Question ${(i + 1)}<strong></h3>`)
+    question = $(`<h4 class='question' id="q${(i + 1)}"></h4>`).append(questions[i]);
+    select = $(`<select class='q${(i + 1)}'>
+                <option>Select Your Answer</option>
+                <option value='1'>1 (Strongly Disagree)</option>
                 <option value='2'>2</option>
                 <option value='3'>3</option>
                 <option value='4'>4</option>
-                <option value='5'>5</option>
+                <option value='5'>5 (Strongly Agree)</option>
                 </select>`);
-    // Add the qs to the page 
-    $('.qs').append(qHead).append(q).append(select);
+    // Add the questions to the page 
+    $('.questions').append(questionHead).append(question).append(select).append('<br><br>');
 }
 
 $("#submitBtn").on("click", function (event) {
@@ -33,10 +33,6 @@ $("#submitBtn").on("click", function (event) {
 
     // Form validation
     var valid = true;
-
-    // if ($("#name").val() === "" || $("#photo").val() === "" || $("#q1").val() === "empty" || $("#q2").val() === "empty" || $("#q3").val() === "empty" || $("#q4").val() === "empty" || $("#q5").val() === "empty" || $("#q6").val() === "empty" || $("#q7").val() === "empty" || $("#q8").val() === "empty" || $("#q9").val() === "empty" || $("#q10").val() === "empty") {
-    //     valid = false;
-    // }
 
     $(":input, :select").each(function () {
         if ($(this).val() === "")
@@ -66,12 +62,15 @@ $("#submitBtn").on("click", function (event) {
         var currentURL = window.location.origin;
 
         // Ajax call for receiving response after POST req
-        $.post(currentURL + "/api/friends", newUser, function (data) {
-            // $("#BFFName").text(data.name);
-            // $("#BFFPhoto").attr("src", data.photo);
+        $.post(currentURL + "/api/friends", newUser).then(function (data) {
+            console.log(data);
+            $('#BFname').text(data.name);
+            $('#BFpic').attr(data.photo);
+            $('#BFmodal').modal('toggle');
         });
     } else {
         // If a required field is missing, show alert
         alert("All fields of the survey must be completed");
     }
 })
+

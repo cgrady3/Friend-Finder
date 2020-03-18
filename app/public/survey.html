@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
     <!-- jQuery -->
@@ -16,7 +17,7 @@
 <body style="background-color:#d2ecf0">
     <div class="container">
         <br>
-        <h2>Survey Questions</h2>
+        <h1>Survey Questions</h1>
         <hr>
         <h3>
             <strong>About You</strong>
@@ -27,7 +28,6 @@
         <input type="text" id="photo" class="form-control" required>
         <hr>
         
-        <h4>Select 1 to indicate Strongly Disagree, Select 5 to indicate Strongly Agree, or the range inbetween</h4>
         <div class="questions"></div>
         <br><br>
         <button type="submit" class="btn btn-primary btn-block" id="submit"><i class="fas fa-check-circle"></i> Submit</button>
@@ -41,6 +41,22 @@
             <br>
         </footer> 
     </div>
+   
+    <div class="modal" id="BFresults" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="BFname"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id="BFpic"></p>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>
 
