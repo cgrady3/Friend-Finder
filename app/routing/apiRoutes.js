@@ -2,7 +2,7 @@ var friends = require('../data/friends');
 
 module.exports = function (app) {
     // display the friends database
-    app.get('/api/survey', function (req, res) {
+    app.get('/api/friends', function (req, res) {
         res.json(friends);
     })
 
@@ -19,9 +19,9 @@ module.exports = function (app) {
         })
 
         // total all of the users scores into a total score
-        userTotScore = userScoresInts.reduce(function (acc, userScoresInts,){
+        userTotScore = userScoresInts.reduce(function (acc, userScoresInts) {
             return acc + userScoresInts;
-        },0)
+        }, 0)
 
         // create a best friend object to hold their info
         // set to 41 since the greatest possible difference for the survey is 40
@@ -32,20 +32,20 @@ module.exports = function (app) {
         }
 
         // loop through all the friends in the database
-        for (i = 0; i < friends.length; i++){
+        for (i = 0; i < friends.length; i++) {
             totScoreDifs = 0;
 
             var friendScores = friends[i].scores;
             // get the i-th friends total score
-            friendTotScore = friendScores.reduce(function(acc,friendScores){
+            friendTotScore = friendScores.reduce(function (acc, friendScores) {
                 return acc + friendScores;
-            },0)
+            }, 0)
 
             // get the absolute differenct in the user and i-th friends score
             totScoreDifs += Math.abs(userTotScore - friendTotScore);
-            
+
             // if the i-th friends score difference is less than the current bf match, become the new match
-            if (totScoreDifs < bfMatch.scoreDif){
+            if (totScoreDifs < bfMatch.scoreDif) {
                 bfMatch.name = friends[i].name;
                 bfMatch.photo = friends[i].photo;
                 bfMatch.scoreDif = totScoreDifs;

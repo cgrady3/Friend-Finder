@@ -10,13 +10,17 @@ var questions = ['You enioy outside activities (ie. day at the beach, hiking, sa
     'You are SUPER excited to meet your next BFF!'
 ]
 
+console.log('hello mon?')
 
-// Use for loop to traverse the qs array
-for (let i = 0; i < questions.length; i++) {
+$(document).ready(function () {
 
-    questionHead = $(`<h3><strong>Question ${(i + 1)}<strong></h3>`)
-    question = $(`<h4 class='question' id="q${(i + 1)}"></h4>`).append(questions[i]);
-    select = $(`<select class='q${(i + 1)}'>
+
+    // Use for loop to traverse the qs array
+    for (let i = 0; i < questions.length; i++) {
+
+        var questionHead = $(`<h3><strong>Question ${(i + 1)}<strong></h3>`)
+        var question = $(`<h4 class='question' id="q${(i + 1)}"></h4>`).append(questions[i]);
+        var select = $(`<select class='select-value'>
                 <option>Select Your Answer</option>
                 <option value='1'>1 (Strongly Disagree)</option>
                 <option value='2'>2</option>
@@ -24,53 +28,56 @@ for (let i = 0; i < questions.length; i++) {
                 <option value='4'>4</option>
                 <option value='5'>5 (Strongly Agree)</option>
                 </select>`);
-    // Add the questions to the page 
-    $('.questions').append(questionHead).append(question).append(select).append('<br><br>');
-}
-
-$("#submitBtn").on("click", function (event) {
-    event.preventDefault();
-
-    // Form validation
-    var valid = true;
-
-    $(":input, :select").each(function () {
-        if ($(this).val() === "")
-            valid = false;
-    });
-
-    if (valid) {
-        var newUser = {
-            name: $("#name").val().trim(),
-            photo: $("#photo").val().trim(),
-            scores: [
-                $("#q1").val(),
-                $("#q2").val(),
-                $("#q3").val(),
-                $("#q4").val(),
-                $("#q5").val(),
-                $("#q6").val(),
-                $("#q7").val(),
-                $("#q8").val(),
-                $("#q9").val(),
-                $("#q10").val()
-            ]
-        };
-
-        console.log(newUser);
-
-        var currentURL = window.location.origin;
-
-        // Ajax call for receiving response after POST req
-        $.post(currentURL + "/api/friends", newUser).then(function (data) {
-            console.log(data);
-            $('#BFname').text(data.name);
-            $('#BFpic').attr(data.photo);
-            $('#BFmodal').modal('toggle');
-        });
-    } else {
-        // If a required field is missing, show alert
-        alert("All fields of the survey must be completed");
+        // Add the questions to the page 
+        $('.questions').append(questionHead).append(question).append(select).append('<br><br>');
     }
-})
 
+
+
+    $("#submitBtn").on("click", function (event) {
+        event.preventDefault();
+
+        // Form validation
+        var valid = true;
+
+        $(":input, :select").each(function () {
+            if ($(this).val() === "")
+                valid = false;
+        });
+
+        if (valid) {
+            var newUser = {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                scores: [
+                    $(".q1").val(),
+                    $(".q2").val(),
+                    $(".q3").val(),
+                    $(".q4").val(),
+                    $(".q5").val(),
+                    $(".q6").val(),
+                    $(".q7").val(),
+                    $(".q8").val(),
+                    $(".q9").val(),
+                    $(".q10").val()
+                ]
+            };
+
+            console.log(newUser);
+
+            var currentURL = window.location.origin;
+
+            // Ajax call for receiving response after POST req
+            $.post(currentURL + "/api/friends", newUser).then(function (data) {
+                console.log(data);
+                $('#BFname').text(data.name);
+                $('#BFpic').attr(data.photo);
+                $('#BFmodal').modal('toggle');
+            });
+        } else {
+            // If a required field is missing, show alert
+            alert("All fields of the survey must be completed");
+        }
+    })
+
+});
