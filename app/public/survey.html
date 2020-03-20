@@ -36,7 +36,8 @@
         </div>
     </div>
     <br><br>
-    <button style="width: 80%; margin: 0 auto;" type='submit' class='btn btn-primary btn-block' id='submit'><i class='fas fa-check-circle'></i>
+    <button style="width: 80%; margin: 0 auto;" type='submit' class='btn btn-primary btn-block' id='submit'><i
+            class='fas fa-check-circle'></i>
         Submit</button>
     <br><br>
     <footer>
@@ -147,24 +148,27 @@
                             $('#BFpic').attr('src', data.photo);
                             $('#BFresults').modal('toggle');
                         });
+
+
+
+                    $('#name').val('')
+                    $('#photo').val('')
+                    $('#q1').val('')
+                    $('#q2').val('')
+                    $('#q3').val('')
+                    $('#q4').val('')
+                    $('#q5').val('')
+                    $('#q6').val('')
+                    $('#q7').val('')
+                    $('#q8').val('')
+                    $('#q9').val('')
+                    $('#q10').val('')
                 }
                 else {
                     // If a required field is missing, show alert
                     alert('All fields of the survey must be completed');
                 }
 
-                $('#name').val('')
-                $('#photo').val('')
-                $('#q1').val('')
-                $('#q2').val('')
-                $('#q3').val('')
-                $('#q4').val('')
-                $('#q5').val('')
-                $('#q6').val('')
-                $('#q7').val('')
-                $('#q8').val('')
-                $('#q9').val('')
-                $('#q10').val('')
             })
         })
     </script>
