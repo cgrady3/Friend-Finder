@@ -33,33 +33,39 @@ $(document).ready(function () {
     }
 
 
-
-    $("#submitBtn").on("click", function (event) {
+    $('#submit').on('click', function (event) {
         event.preventDefault();
 
+        console.log('hey tere ya cklicks')
         // Form validation
-        var valid = true;
+        function formValidation() {
+            var valid = true;
+            $('.form-control').each(function () {
+                if ($(this).val() === '')
+                    valid = false;
+            });
+            $('.select-value').each(function () {
+                if ($(this).val() === '')
+                    valid = false;
+            });
+            return valid;
+        }
 
-        $(":input, :select").each(function () {
-            if ($(this).val() === "")
-                valid = false;
-        });
-
-        if (valid) {
+        if (formValidation()) {
             var newUser = {
-                name: $("#name").val().trim(),
-                photo: $("#photo").val().trim(),
+                name: $('#name').val().trim(),
+                photo: $('#photo').val().trim(),
                 scores: [
-                    $(".q1").val(),
-                    $(".q2").val(),
-                    $(".q3").val(),
-                    $(".q4").val(),
-                    $(".q5").val(),
-                    $(".q6").val(),
-                    $(".q7").val(),
-                    $(".q8").val(),
-                    $(".q9").val(),
-                    $(".q10").val()
+                    $('#q1').val(),
+                    $('#q2').val(),
+                    $('#q3').val(),
+                    $('#q4').val(),
+                    $('#q5').val(),
+                    $('#q6').val(),
+                    $('#q7').val(),
+                    $('#q8').val(),
+                    $('#q9').val(),
+                    $('#q10').val()
                 ]
             };
 
@@ -68,16 +74,30 @@ $(document).ready(function () {
             var currentURL = window.location.origin;
 
             // Ajax call for receiving response after POST req
-            $.post(currentURL + "/api/friends", newUser).then(function (data) {
-                console.log(data);
-                $('#BFname').text(data.name);
-                $('#BFpic').attr(data.photo);
-                $('#BFmodal').modal('toggle');
-            });
+            $.post(currentURL + '/api/friends', newUser)
+                .then(function (data) {
+                    console.log(data);
+                    $('#BFname').text(data.name);
+                    $('#BFpic').attr('src', data.photo);
+                    $('#BFmodal').modal('toggle');
+                });
         } else {
             // If a required field is missing, show alert
-            alert("All fields of the survey must be completed");
+            alert('All fields of the survey must be completed');
         }
+
+        $('#name').val('')
+        $('#photo').val('')
+        $('#q1').val('')
+        $('#q2').val('')
+        $('#q3').val('')
+        $('#q4').val('')
+        $('#q5').val('')
+        $('#q6').val('')
+        $('#q7').val('')
+        $('#q8').val('')
+        $('#q9').val('')
+        $('#q10').val('')
     })
 
 });
