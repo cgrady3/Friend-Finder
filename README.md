@@ -3,4 +3,4 @@ A compatibility-based "FriendFinder" application -- dating app style! This full-
 
 ![](title.png)
 ![](survey.png)
-![](results.png)
+![](result.png)
